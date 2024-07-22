@@ -34,16 +34,7 @@ class AddPillReminder : AppCompatActivity() {
 
 
 
-        binding.numPickHour.maxValue=12
-        binding.numPickHour.minValue=0
 
-        binding.numPickHour.maxValue=60
-        binding.numPickHour.maxValue=0
-
-        // Set the AM/PM values for the third NumberPicker
-        binding.numPickAm.minValue = 0
-        binding.numPickAm.maxValue = pickerVals.size - 1
-        binding.numPickAm.displayedValues=pickerVals
 
         // Retrieve the string array from resources
         val reminderTypes = resources.getStringArray(R.array.reminder_types)
@@ -69,6 +60,18 @@ class AddPillReminder : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
+
+        }
+
+        binding.btnSave.setOnClickListener {
+            val hour=binding.timePicker.hour
+            val minute=binding.timePicker.minute
+            val soundEnabled=binding.swSound.isChecked
+            val vibrationEnabled=binding.swVibration.isChecked
+            val type=binding.spinnerType.selectedItem.toString()
+            val reminderText=binding.etReminderText.text.toString()
+
+
 
         }
 
