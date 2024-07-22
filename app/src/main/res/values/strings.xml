@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PillReminder</string>
+    <string-array name="reminder_types">
+        <item>Morning</item>
+        <item>Afternoon</item>
+        <item>Evening</item>
+        <item>None</item>
+    </string-array>
+</resources>
