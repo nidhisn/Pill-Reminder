@@ -1,59 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black">
+    android:layout_margin="20dp"
+    android:layout_marginLeft="20dp"
+    android:background="@drawable/rectangle"
+    android:paddingBottom="10dp">
 
     <TextView
         android:id="@+id/tvType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="248dp"
         android:text="Morning Pill"
         android:textColor="@color/white"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="28dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="10 :"
+        android:id="@+id/tvTime"
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="32dp"
+        android:lineSpacingExtra="0dp"
+
         android:textColor="@color/white"
-        android:textSize="28sp"
+        android:textSize="60sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="72dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvRepeat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00"
-        android:textColor="@color/white"
-        android:textSize="29sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="72dp" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="am"
-        android:textColor="@color/white"
-        android:textSize="29sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="71dp" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="276dp"
         android:text="Everyday"
         android:textColor="@color/white"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="125dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime" />
 </androidx.constraintlayout.widget.ConstraintLayout>

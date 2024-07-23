@@ -1,5 +1,7 @@
 package com.example.pillreminder
 
+import android.app.Activity
+import android.content.Intent
 import android.hardware.biometrics.BiometricManager
 import android.os.Bundle
 import android.view.View
@@ -16,7 +18,6 @@ class AddPillReminder : AppCompatActivity() {
 
     private lateinit var binding:ActivityAddPillReminderBinding
 
-    private val pickerVals = arrayOf("AM", "PM")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,7 @@ class AddPillReminder : AppCompatActivity() {
             ) {
                 val selectedItem=parent?.getItemAtPosition(position).toString()
                 binding.tvTypeTitle.setText(selectedItem+" Pill")
+                //binding.tvTypeTitle.text = "$selectedItem Pill"
 
             }
 
@@ -72,6 +74,11 @@ class AddPillReminder : AppCompatActivity() {
             val reminderText=binding.etReminderText.text.toString()
 
 
+            val resultIntent = Intent()
+            val reminder = Reminder(type, "$hour:$minute", "Everyday", soundEnabled, vibrationEnabled, reminderText)
+            resultIntent.putExtra("NEW_REMINDER", reminder)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
 
         }
 
