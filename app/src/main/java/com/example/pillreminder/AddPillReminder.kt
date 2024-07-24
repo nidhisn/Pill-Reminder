@@ -1,6 +1,9 @@
 package com.example.pillreminder
 
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.hardware.biometrics.BiometricManager
 import android.os.Bundle
@@ -13,6 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.pillreminder.databinding.ActivityAddPillReminderBinding
 import com.example.pillreminder.databinding.ActivityMainBinding
+import java.util.Calendar
 
 class AddPillReminder : AppCompatActivity() {
 
@@ -79,6 +83,24 @@ class AddPillReminder : AppCompatActivity() {
             resultIntent.putExtra("NEW_REMINDER", reminder)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
+
+            // Schedule alarm
+            val calendar = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, hour)
+                set(Calendar.MINUTE, minute)
+                set(Calendar.SECOND, 0)
+                if (before(Calendar.getInstance())) {
+                    add(Calendar.DATE, 1)
+                }
+            }
+
+            val alarmIntent = Intent(this, ReminderReceiver::class.java).apply {
+                putExtra("REMINDER_TEXT", reminderText)
+            }
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
 
         }
 

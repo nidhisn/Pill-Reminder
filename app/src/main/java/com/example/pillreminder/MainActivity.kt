@@ -1,10 +1,15 @@
 package com.example.pillreminder
 
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,13 +22,19 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val ADD_REMINDER_REQUEST = 1
+        const val CHANNEL_ID = "PILL_REMINDER_CHANNEL"
     }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        // Create notification channel
+        createNotificationChannel()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -46,6 +57,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, AddPillReminder::class.java)
             startActivityForResult(intent, ADD_REMINDER_REQUEST)
         }
+
+
     }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -57,6 +70,19 @@ class MainActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
                 }
             }
+    }
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Pill Reminder"
+            val descriptionText = "Channel for pill reminders"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
 
